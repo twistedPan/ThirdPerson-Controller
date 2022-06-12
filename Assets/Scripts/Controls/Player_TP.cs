@@ -28,7 +28,6 @@ public class Player_TP : MonoBehaviour
 
     private Rigidbody rb;    
     private PlayerController controls;
-    private InteractionChecker interactionChecker;
     private ThirdPersonCamera cameraSc;
     private Transform cam;
     private Vector2 movement;
@@ -50,7 +49,6 @@ public class Player_TP : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         cam = Camera.main.transform;
         cameraSc = cam.GetComponent<ThirdPersonCamera>();
-        interactionChecker = GetComponent<InteractionChecker>();
         
         origin = transform.position;
 
@@ -61,10 +59,8 @@ public class Player_TP : MonoBehaviour
         controls.Player.Sprint.performed += _ => Sprint();
         controls.Player.Sprint.canceled += _ => Sprint();
 
-        controls.Player.Look.started += ctx => FindObjectOfType<ThirdPersonCamera>().Look(ctx.ReadValue<Vector2>());
-        controls.Player.Zoom.performed += ctx => FindObjectOfType<ThirdPersonCamera>().ZoomCam(ctx.ReadValue<Vector2>());
-
-        controls.Player.Action.performed += _ => Interact();
+        controls.Player.Look.started += ctx => cameraSc.Look(ctx.ReadValue<Vector2>());
+        controls.Player.Zoom.performed += ctx => cameraSc.ZoomCam(ctx.ReadValue<Vector2>());
 
         controls.Player.Move.performed += _ => isMoving = true; 
         controls.Player.Move.canceled += _ => isMoving = false;
@@ -72,6 +68,9 @@ public class Player_TP : MonoBehaviour
         controls.Player.Jump.performed += _ => Jump(); // sJumping = true; // Jump(); // 
 
         origin = transform.position;
+
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
 
@@ -86,10 +85,6 @@ public class Player_TP : MonoBehaviour
 
         BodyVelocity = rb.velocity;
     }
-
-    
-    // Interact
-    public void Interact() => interactionChecker.ActionCheck();
 
     // Stop player inputs
     public void TogglePlayerMovement()

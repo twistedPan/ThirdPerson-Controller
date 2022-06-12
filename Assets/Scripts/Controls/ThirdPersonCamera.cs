@@ -96,12 +96,27 @@ public class ThirdPersonCamera : MonoBehaviour
             //Debug.Log(sprinting);
             _amount = Mathf.Clamp(_amount, 0,1);
 
-            float stepLerp = _Utilities.MapRange(_amount, 0,1, Mathf.PI,Mathf.PI*2);
+            float stepLerp = MapRange(_amount, 0,1, Mathf.PI,Mathf.PI*2);
             float sinMove = Mathf.Sin(stepLerp); 
             float headBob = _sprinting ? 0.25f : headBobAmount;
-            float camLerp = _Utilities.MapRange(sinMove, -1,1, -headBob,headBob);
+            float camLerp = MapRange(sinMove, -1,1, -headBob,headBob);
 
             headMovement = Mathf.Sin(camLerp);
+        }
+    }
+
+
+    float MapRange(float n, float start1, float stop1, float start2, float stop2) 
+    {
+        float newval = (n - start1) / (stop1 - start1) * (stop2 - start2) + start2;
+        //if (newval != ) {return newval;}
+        if (start2 < stop2) 
+        {
+            return Mathf.Clamp(newval, start2, stop2);
+        } 
+        else 
+        {
+            return Mathf.Clamp(newval, stop2, start2);
         }
     }
 }
