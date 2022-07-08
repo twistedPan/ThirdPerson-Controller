@@ -1,2 +1,2 @@
 # ThirdPerson Controller Unity
-Simple Thirdperson Controller using the new Inputssytem 
+Simple physics based Third Person Controller using the new Inputssytem.
