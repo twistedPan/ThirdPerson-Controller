@@ -121,10 +121,12 @@ public class Player_TP : MonoBehaviour
         if (direction.magnitude == 0) // -> stand still & look with cam & do not move body
         {
             // turn body along direction of cam 
-            /* Vector3 relativPos = cam.position - transform.position;
+            /* 
+            Vector3 relativPos = cam.position - transform.position;
             relativPos.y = 0.0f;
             Quaternion rotation = Quaternion.LookRotation(-relativPos, Vector3.up);
-            transform.rotation = rotation;   */  
+            transform.rotation = rotation;   
+            */  
 
             rb.velocity = new Vector3(0f, rb.velocity.y, 0f); // stops gliding 
             rb.angularVelocity = Vector3.zero; // stops spinning 
@@ -155,7 +157,6 @@ public class Player_TP : MonoBehaviour
         {
             rb.velocity = Vector3.up * jumpForce;
         }
-        
     }
 
 
