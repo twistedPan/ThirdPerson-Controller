@@ -1,6 +1,5 @@
 # ThirdPerson Controller Unity
 Simple physics based Third Person Controller using the new Inputssytem.
 
-[a link](/Assets/Scripts/Controls/Player_TP.cs)
-
-[a link](/Assets/Scripts/Controls/ThirdPersonCamera.cs)
+[Player Script](/Assets/Scripts/Controls/Player_TP.cs)
+[Camera Script](/Assets/Scripts/Controls/ThirdPersonCamera.cs)
